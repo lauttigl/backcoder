@@ -1,6 +1,6 @@
-import ProductManager from './ProductManager.js'
+import ProductManager from "./ProductManager.js"
+import express from "express";
 
-const express = require("express")
 
 const app = express()
 const port = 8080
