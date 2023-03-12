@@ -1,28 +1,16 @@
-import ProductManager from "./ProductManager.js"
+
 import express from "express";
+import productsRouter from "./routes/products.routes.js"
 
 
-const app = express()
-const port = 8080
-const productManager = new ProductManager()
 
+const app = express();
 
-app.get("/products", async (req,res) => {
-    const limit = req.query.limit;
-    let products = await productManager.getProducts()
-    if (limit) {
-        products = products.slice(0,limit)
-    }
-    res.send(products)
-} )
+app.use(express.json());
+app.use(express.urlencoded({extended:true}))
+app.use("/api/products", productsRouter)
 
-app.get("/products/:pid", async (req,res) => {
-    const id = parseInt(req.params.pid)
-    const product = await productManager.getProductById(id)
-    res.send(product)
+app.listen(8080, (req, res) => {
+    console.log("Listening on port 8080")
 })
 
-
-app.listen(port,() =>{
-    console.log("servidor levantado en el puerto 8080")
-})

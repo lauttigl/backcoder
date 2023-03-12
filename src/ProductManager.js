@@ -6,14 +6,7 @@
         constructor(){
             this.path = './Products.json';
             this.products = [];
-           
         }
-
-
-
-        
-
-
         // CODIGO DE LA CLASE
         consultProduct = async () => {
             if (fs.existsSync(this.path)){
@@ -65,32 +58,39 @@
             }
             deleteProduct = async (id) => {
                 try {
-                const products = await this.consultProduct();
-                const updatedProducts = products.filter((product) => product.id !== id)
+                const products = await this.getProducts();
+                
+                const updatedProducts = products.filter((product) => String(product.id) !== String(id))
+
                 await fs.promises.writeFile(this.path, JSON.stringify(updatedProducts, null, "\t"))
-                console.log(`Product with id ${id} deleted successfully`)
+                console.log(`eroduct with id ${id} deleted successfully`)
                 return updatedProducts
                 } catch (error) {
-                console.log(`Error deleting product with id ${id}: ${error}`)
+                console.log(`error deleting product with id ${id}: ${error}`)
                 }
             };
 
             updateProduct = async (id, updatedProduct) => {
                 try {
-                const products = await this.consultProduct();
-                const index = products.findIndex((product) => product.id === id)
-                if (index === -1) {
-                    console.log(`Product with id ${id} not found`)
+                  const products = await this.getProducts();
+                  console.log(`Current products: ${JSON.stringify(products)}`);
+                  const index = products.findIndex((product) => product.id == id);
+                 
+                  if (index === -1) {
+                    
                     return;
-                }
-                products[index] = { ...products[index], ...updatedProduct };
-                await fs.promises.writeFile(this.path, JSON.stringify(products, null, "\t"))
-                console.log(`Product with id ${id} updated successfully`)
-                return products;
+                  }
+                 
+                  products[index] = { ...products[index], ...updatedProduct };
+                  await fs.promises.writeFile(
+                    this.path,
+                    JSON.stringify(products, null, "\t")
+                  );
+                  return products;
                 } catch (error) {
-                console.log(`Error updating product with id ${id}: ${error}`)
+                  console.log(`Error updating product with id ${id}: ${error}`);
                 }
-            }
+              };
 
 
             

@@ -1,21 +1,13 @@
 [
 	{
-		"title": "celular",
-		"description": "celular",
-		"price": 2,
-		"thumbnail": "foto",
-		"code": "123",
-		"stock": 1,
-		"id": 1
-	},
-	{
 		"title": "Nuevo Producto",
 		"description": "celular",
 		"price": 2,
 		"thumbnail": "foto",
 		"code": "123",
 		"stock": 1,
-		"id": 2
+		"id": 2,
+		"category": "celulares"
 	},
 	{
 		"title": "tv samsung",
@@ -38,19 +30,30 @@
 	{
 		"title": "tv samsung",
 		"description": "tv samsung",
-		"price": 20000,
+		"price": 50000,
 		"thumbnail": "foto",
 		"code": "123",
-		"stock": 5,
+		"stock": 10,
 		"id": 5
 	},
 	{
-		"title": "tv samsung",
-		"description": "tv samsung",
-		"price": 20000,
-		"thumbnail": "foto",
-		"code": "123",
-		"stock": 5,
-		"id": 6
+		"title": "probando",
+		"description": "tv led",
+		"code": "tvled",
+		"price": 80000,
+		"status": "true",
+		"stock": 25,
+		"category": "television",
+		"id": 7
+	},
+	{
+		"title": "samsung smart'",
+		"description": "tv smart",
+		"code": "tvsmg",
+		"price": 150000,
+		"status": "true",
+		"stock": 45,
+		"category": "television",
+		"id": 8
 	}
 ]
