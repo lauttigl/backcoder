@@ -55,5 +55,15 @@
 		"stock": 45,
 		"category": "television",
 		"id": 8
+	},
+	{
+		"title": "testing",
+		"description": "tv smart",
+		"code": "tvsmg",
+		"price": 150000,
+		"status": "true",
+		"stock": 45,
+		"category": "television",
+		"id": 9
 	}
 ]

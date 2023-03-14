@@ -85,12 +85,12 @@
                   await fs.promises.writeFile(
                     this.path,
                     JSON.stringify(products, null, "\t")
-                  );
+                  )
                   return products;
                 } catch (error) {
                   console.log(`Error updating product with id ${id}: ${error}`);
                 }
-              };
+              }
 
 
             
