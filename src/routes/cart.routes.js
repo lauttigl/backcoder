@@ -18,7 +18,7 @@ router.post('/', async (req, res) => {
   const result = await cartManager.addCart(cart)
 
   return res.status(201).send({ status: 'success', message: result })
-});
+})
 
 
 router.get('/', async (req, res) => {
