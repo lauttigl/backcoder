@@ -8,6 +8,7 @@ socket.connect = function(httpServer) {
 
     io.on("connection", (socket) => {
         console.log(`${socket.id} connected`)
+        
     })
 
 }

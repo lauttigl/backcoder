@@ -65,5 +65,15 @@
 		"stock": 45,
 		"category": "television",
 		"id": 9
+	},
+	{
+		"title": "tv LG",
+		"description": "tv smart",
+		"code": "tvlg",
+		"price": 200000,
+		"status": "true",
+		"stock": 25,
+		"category": "television",
+		"id": 10
 	}
 ]
