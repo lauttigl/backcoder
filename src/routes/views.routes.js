@@ -12,10 +12,10 @@ router.get("/", (req, res) => {
     });
   });
 router.get("/realtimeproducts", (req, res) => {
-    fs.readFile("realtimeproducts", (err, data) => {
+    fs.readFile("products.json", (err, data) => {
       if (err) throw err;
       const products = JSON.parse(data);
-      res.render("home", { products });
+      res.render("realtimeproducts", { products });
     });
   });
   router.delete("/:id", async (req, res) => {
