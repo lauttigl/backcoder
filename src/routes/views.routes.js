@@ -18,7 +18,18 @@ router.get("/realtimeproducts", (req, res) => {
       res.render("home", { products });
     });
   });
-
+  router.delete("/:id", async (req, res) => {
+    const id = req.params.id;
+    await productManager.deleteProduct(id);
+    res.redirect("/");
+  });
+  
+  router.post("/", async (req, res) => {
+    const product = req.body;
+    await productManager.addProduct(product);
+    res.redirect("/");
+  });
+  
 
 
 
