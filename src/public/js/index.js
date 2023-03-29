@@ -1,37 +1,44 @@
-import ProductManager from "./src/ProductManager.js";
+
 const socket = io();
 
-
-const manager = new ProductManager();
 
 
    
 const addProductForm = document.querySelector("#addProductForm");
 
-addProductForm.addEventListener("submit", async (event) => {
-  event.preventDefault();
-  
-  const newProd = {
-    title: title.value,
-    description: description.value,
-    price: parseInt(price.value),
-    code: code.value,
-    stock: parseInt(stock.value),
-    category: category.value
-  }
-  
-
- await fetch ('/api/products', {
-    method: 'post',
-    headers: {
+addProductForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    
+    const newProd = {
+      title: title.value,
+      description: description.value,
+      price: parseInt(price.value),
+      code: code.value,
+      stock: parseInt(stock.value),
+      category: category.value
+    }
+    
+    fetch('/api/products', {
+      method: 'post',
+      headers: {
         'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(newProd)
- })
-
-  const result = await manager.addProduct(product);
-  console.log(result);
-});
-
+      },
+      body: newProd
+    })
+    .then(response => response.json())
+    .then(product => {
+      console.log(product);
+      return manager.addProduct(product);
+    })
+    .then(result => {
+      console.log(result);
+     
+    })
+    .catch(error => {
+      console.error(error);
+     
+    });
+  });
+  
 
 

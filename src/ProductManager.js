@@ -2,6 +2,7 @@
 
 
 
+
     export default class ProductManager {
         constructor(){
             this.path = './Products.json';
@@ -28,6 +29,7 @@
                 }
                 products.push(product)
                 await fs.promises.writeFile(this.path, JSON.stringify(products, null , "\t"))
+                
                 return products;
             }
             getProducts = async () => {
