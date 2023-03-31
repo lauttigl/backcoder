@@ -1,5 +1,5 @@
     import fs from 'fs';
-
+import socket from "./socket.js"
 
 
 
@@ -21,7 +21,7 @@
         };
 
             addProduct = async (product) => { 
-                const products = await this.consultProduct();
+                const products = await this.getProducts();
                 if(products.length === 0) {
                     product.id = 1;
                 } else {
@@ -29,9 +29,10 @@
                 }
                 products.push(product)
                 await fs.promises.writeFile(this.path, JSON.stringify(products, null , "\t"))
-                
+                socket.io.emit("product_added", product)
                 return products;
             }
+    
             getProducts = async () => {
                 if (fs.existsSync(this.path)) {
                     const data = await fs.promises.readFile(this.path, 'utf-8')

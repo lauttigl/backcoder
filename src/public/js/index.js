@@ -4,7 +4,7 @@ const socket = io();
 
 
    
-const addProductForm = document.querySelector("#addProductForm");
+let addProductForm = document.querySelector("#addProductForm");
 
 addProductForm.addEventListener("submit", (event) => {
     event.preventDefault();
@@ -40,5 +40,3 @@ addProductForm.addEventListener("submit", (event) => {
     });
   });
   
-
-
