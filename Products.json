@@ -75,14 +75,5 @@
 		"stock": 25,
 		"category": "television",
 		"id": 10
-	},
-	{
-		"title": "asdasd",
-		"description": "asdada",
-		"price": 123,
-		"code": "123",
-		"stock": 123,
-		"category": "asdasda",
-		"id": 11
 	}
 ]
