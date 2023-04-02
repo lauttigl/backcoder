@@ -2,8 +2,6 @@
 const socket = io();
 
 
-
-   
 let addProductForm = document.querySelector("#addProductForm");
 
 addProductForm.addEventListener("submit", (event) => {
@@ -28,7 +26,6 @@ addProductForm.addEventListener("submit", (event) => {
     .then(response => response.json())
     .then(product => {
       console.log(product);
-      return manager.addProduct(product);
     })
     .then(result => {
       console.log(result);
@@ -36,7 +33,7 @@ addProductForm.addEventListener("submit", (event) => {
     })
     .catch(error => {
       console.error(error);
-     
+     socket.emit('addProduct', newProd)
     });
   });
   
