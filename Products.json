@@ -75,5 +75,54 @@
 		"stock": 25,
 		"category": "television",
 		"id": 10
+	},
+	{
+		"title": "testing",
+		"description": "tv smart",
+		"code": "tvsmg",
+		"price": 150000,
+		"status": "true",
+		"stock": 45,
+		"category": "television",
+		"id": 11
+	},
+	{
+		"title": "mongoose",
+		"description": "tv",
+		"code": "tvsmg",
+		"price": 90000,
+		"status": "true",
+		"stock": 10,
+		"category": "probando mongoose",
+		"id": 12
+	},
+	{
+		"title": "mongoose2",
+		"description": "tv",
+		"code": "tvsmg",
+		"price": 90000,
+		"status": "true",
+		"stock": 10,
+		"category": "probando mongoose",
+		"id": 13
+	},
+	{
+		"title": "mongoose3",
+		"description": "tv",
+		"code": "tvsmg",
+		"price": 90000,
+		"status": "true",
+		"stock": 10,
+		"category": "probando mongoose",
+		"id": 14
+	},
+	{
+		"title": "mongoose",
+		"description": "probando",
+		"price": 123,
+		"code": "probando",
+		"stock": 123,
+		"category": "probando",
+		"id": 15
 	}
 ]
