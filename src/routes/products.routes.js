@@ -46,7 +46,7 @@ router.post("/", async (req, res) => {
  
    
 });
-//ESTE GET ES EL QUE FUNCIONABA SIN MONGOOSE
+
 // router.get("/", async (req,res) =>{
 //     const products = await productManager.getProducts()
 //     if(products.length ===0){
@@ -82,49 +82,12 @@ router.put("/:pid", async (req, res) => {
   }
 })
 
-//ESTE PUT FUNCIONA SIN MONGOOSE
-// router.put("/:id", async (req, res) => {
-//     const productId = req.params.id
-//     const changes = req.body;
-  
-//     const updatedProducts = await productManager.updateProduct(productId, changes);
-    
-//     console.log(productId)
-    
-//     console.log(changes)
-  
-//     if (updatedProducts) {
-//       return res
-//         .status(200)
-//         .send({ status: "OK", message: "Product successfully updated" });
-//     } else {
-//       return res
-//         .status(404)
-//         .send({ status: "error", message: "Product not found" });
-//     }
-//   });
-
-//ESTE DELETE FUNCIONA SIN MONGOOSE
-  // router.delete("/:id", async (req, res) => {
-  //   const productId = req.params.id;
-  
-  //   const updatedProducts = await productManager.deleteProduct(productId);
-  
-  //   if (updatedProducts) {
-  //     return res
-  //       .status(200)
-  //       .send({ status: "success", message: "Product successfully deleted" });
-  //   } else {
-  //     return res
-  //       .status(404)
-  //       .send({ status: "error", message: "Product not found" });
-  //   }
-  // })
-
   router.delete("/:pid", async (req, res) => {
     const {pid} =req.params
 
     const product = await productModel.deleteOne({_id: pid})
     return res.send({status:"success", payload: product})
   })
+
+  
 export default router
