@@ -1,6 +1,8 @@
 import { Router } from 'express'
 import CartManager from '../dao/CartManager.js'
 import { cartModel } from '../dao/models/cart.models.js'
+import mongoose from 'mongoose'
+import { productModel } from '../dao/models/products.model.js'
 
 const router = Router()
 
@@ -42,7 +44,11 @@ router.get("/", async (req, res) => {
 router.get("/:cid", async (req, res) => {
   try {
     const { cid } = req.params;
-    const cart = await cartModel.findById(cid).populate('products');
+    const cart = await cartModel.findById(cid).populate('products.product', 'title price description');
+
+    console.log(cart)
+
+
 
     if (!cart) {
       return res.status(400).send({ status: "error", error: "missing information" });
@@ -95,12 +101,20 @@ router.put('/:cid', async (req, res) => {
       return res.status(404).send({ status: 'error', error: 'Cart not found' });
     }
 
-    const existingProduct = cart.products.find(product => product.id === productId);
+    if (!mongoose.Types.ObjectId.isValid(productId)) {
+      return res.status(400).send({ status: 'error', error: 'Invalid productId' });
+    }
+
+    const existingProduct = cart.products.find(product => product._id.toString() === productId);
 
     if (existingProduct) {
       existingProduct.quantity += quantity;
     } else {
-      cart.products.push({ id: productId, quantity });
+      const product = await productModel.findById(productId);
+      if (!product) {
+        return res.status(404).send({ status: 'error', error: 'Product not found' });
+      }
+      cart.products.push({ _id: product._id,product:product, quantity });
     }
 
     const updatedCart = await cart.save();

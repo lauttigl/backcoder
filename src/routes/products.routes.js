@@ -4,22 +4,12 @@ import { productModel } from "../dao/models/products.model.js";
 
 const router = Router();
 
-const productManager= new ProductManager
+const productManager= new ProductManager()
 
 
 
 
 router.post("/", async (req, res) => {
-  //ESTE CODIGO FUNCIONABA SIN MONGOOSE
-    // let product = req.body
-
-    // if (!product.title || !product.description || !product.code || !product.price || !product.status || !product.stock || !product.category){
-    //     return res
-    //     .status(400)
-    //     .send({status: "error", error: "incomplete values"})
-    // }
-    // const result = await productManager.addProduct(product)
-      // return res.status(201).send({status: "success", message: "product added"});
     try {
       const {title,description,price,code,stock,category} = req.body
       if (!title || !description || !price || !code || !stock || !category)
@@ -47,16 +37,6 @@ router.post("/", async (req, res) => {
    
 });
 
-// router.get("/", async (req,res) =>{
-//     const products = await productManager.getProducts()
-//     if(products.length ===0){
-//         return res
-//             .status(404)
-//             .send({status:"error", message: "there are not products registred"})
-//     }
-//     return res.status(200).send({status:"OK", message: products})
-// });
-
 router.get("/", async (req, res) => {
   try {
     const products = await productModel.find()
@@ -65,7 +45,19 @@ router.get("/", async (req, res) => {
     console.log(error)
   }
 })
-
+router.get("/:pid", async (req, res) => {
+  try {
+    const { pid } = req.params;
+    const product = await productModel.findById(pid);
+    if (!product) {
+      return res.status(404).send({ status: "error", error: "product not found" });
+    }
+    return res.send({ status: "success", payload: product });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).send({ status: "error", error: "server error" });
+  }
+});
 router.put("/:pid", async (req, res) => {
   try {
     const {pid} = req.params
