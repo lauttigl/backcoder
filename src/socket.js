@@ -9,21 +9,24 @@ socket.connect = function(httpServer) {
 
 
     socket.io.on("connection", async (socket) => {
-        console.log(`${socket.id} connected`)
-        const products = await productManager.getProducts()
-
-        socket.on('upload', async (file) => {
-            file.forEach((e) => {
-                writeFileSync(path.join(__dirname, `./public/img/${e.name}`), e.data)
-            })
-        })
-        socket.emit(`products`, products)
-        socket.on('addProduct', async (newProd) => {
-            const product = await productManager.addProduct(newProd)
-            socket.emit('newProduct', product)
-        })
-        
-    })
+        console.log(`${socket.id} connected`);
+        const products = await productManager.getProducts();
+      
+        socket.on("upload", async (file) => {
+          file.forEach((e) => {
+            writeFileSync(path.join(__dirname, `./public/img/${e.name}`), e.data);
+          });
+        });
+      
+        socket.emit(`products`, products);
+      
+        socket.on("addProduct", async (newProd) => {
+          const product = await productManager.addProduct(newProd);
+          socket.emit("newProduct", product);
+          socket.broadcast.emit("newProduct", product);
+        });
+      });
+      
 
 }
 
