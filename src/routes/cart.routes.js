@@ -1,12 +1,11 @@
 import { Router } from 'express'
-import CartManager from '../dao/CartManager.js'
 import { cartModel } from '../dao/models/cart.models.js'
 import mongoose from 'mongoose'
 import { productModel } from '../dao/models/products.model.js'
 
 const router = Router()
 
-const cartManager = new CartManager()
+
 
 router.post('/', async (req,res) => {
   try {

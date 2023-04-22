@@ -124,5 +124,14 @@
 		"stock": 123,
 		"category": "probando",
 		"id": 15
+	},
+	{
+		"title": "samsung a30",
+		"description": "celular a30",
+		"price": 75000,
+		"code": "456",
+		"stock": 6,
+		"category": "celulares",
+		"id": 16
 	}
 ]

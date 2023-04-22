@@ -1,15 +1,28 @@
-<ul>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Productos</title>
+    <link rel="stylesheet" type="text/css" href="/public/css/products.css">
+  </head>
+  <body>
+<ul class="product-list">
    {{#each products}}
-   <l1>{{title}}</l1>
-   <li>{{price}}</li>
-   <li>{{category}}</li>
-   <li>{{description}}</li>
-   <li>{{stock}}</li>
-   <li>{{code}}</li>
-   <li>{{status}}</li>
+   <li class="product-item">
+      <div class="productbox">
+         <h2>{{this.title}}</h2>
+         <p>{{this.price}}</p>
+         <p>{{this.category}}</p>
+         <p>{{this.description}}</p>
+         <p>{{this.stock}}</p>
+         <p>{{this.code}}</p>
+         <p>{{this.status}}</p>
+      </div>
+   </li>
    {{/each}}
 </ul>
 
 
-<script src="/js/index.js"></script>
-<script src="/socket.io/socket.io.js"></script>
+    {{!-- <script src="/js/index.js"></script>
+    <script src="/socket.io/socket.io.js"></script> --}}
+  </body>
+</html>

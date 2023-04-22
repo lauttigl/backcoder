@@ -1,10 +1,9 @@
 import { Router } from "express";
-import ProductManager from "../dao/ProductManager.js";
 import { productModel } from "../dao/models/products.model.js";
 
 const router = Router();
 
-const productManager= new ProductManager()
+// const productManager= new ProductManager()
 
 
 
@@ -42,7 +41,7 @@ router.get("/", async (req, res) => {
     const products = await productModel.find()
     res.send({status:"success", payload: products})
   } catch (error){
-    console.log(error)
+
   }
 })
 router.get("/:pid", async (req, res) => {

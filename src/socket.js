@@ -1,5 +1,5 @@
 import { Server } from "socket.io";
-import ProductManager from "./dao/ProductManager.js"
+import ProductManager from "./dao/dbmanagers/products.js";
 
 const socket = {}
 
@@ -27,9 +27,7 @@ socket.connect = function(httpServer) {
 
 }
 
-
-
-
-
-
 export default socket
+
+
+    
