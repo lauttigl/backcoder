@@ -27,6 +27,15 @@ router.get("/realtimeproducts", async (req,res) => {
   })
 })
 
+router.get("/register",(req,res) => {
+  res.render("register")
+})
+
+
+router.get("/login", (req,res) => {
+  res.render("login")
+})
+
   // router.delete("/:id", async (req, res) => {
   //   const id = req.params.id;
   //   await productManager.deleteProduct(id);

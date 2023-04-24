@@ -20,3 +20,5 @@ addProductForm.addEventListener("submit", (event) => {
 socket.on("newProduct", (product) => {
     console.log(product);
 });
+
+
