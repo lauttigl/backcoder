@@ -1,44 +1,38 @@
 import { Router } from "express";
 import userModel from "../dao/models/user.models.js";
+import { isValidPassword, createHash } from "../utils.js";
+import passport from "passport";
+
+
 
 const router = Router()
 
-router.post("/login", async (req, res) => {
-    try{
-        const {email,password} =req.body
+router.post("/login", passport.authenticate("login",{failureRedirect:"/failLogin"}),  async (req, res) => {
 
-        const user =await userModel.findOne({email,password})
-        if(!user){
-            return res.status(400).send({status:"error", error: "incorrect credentials"})
-        }
-
-        req.session.user = {
-            name: `${user.first_name} ${user.last_name}`,
-            email: user.email,
-            age: user.age,
-        }
-        return res.send({status: "success", message:"Logged In", payload :req.session.user})
-    }catch(error){
-        console.log(error)}
+   req.session.user = {
+    first_name: req.user.first_name,
+    last_name: req.user.last_name,
+    age: req.user.age,
+    email: req.user.email,
+   }
+   return res.send({status:"success", payload: req.user})
+})
+router.get("/failLogin", (req,res) => {
+    res.send({status:"error", error:"authentication error"})
 })
 
-router.post("/register", async (req, res) => {
-    try {
-        const {first_name, last_name, email, age, password} =   req.body 
+router.post("/register", passport.authenticate("register",{failureRedirect:"/failRegister"}), async (req, res) => {
+ return res.send({status:"success", message:"user registered"})
+})
+router.get("/failRegister", (req,res) => {
+    return res.send({status:"status", error: "authentication error"})
+})
 
-    const userExists = await userModel.findOne({email})
-    if (userExists) {
-        return res.status(400).send({status:"error", error: "user already exists"})
-    }
-    const user= {
-        first_name, last_name, email, age, password,
-    }
+router.get("/github", passport.authenticate("githublogin", {scope:["user:email"]}),(req,res) => {})
 
-    await userModel.create(user)
-    return res.send({status:"succes", message:"user registered"})
-    } catch (error){
-        console.log(error)
-    }
+router.get("/githubcallback", passport.authenticate("githlogin", {failureRedirect:"/login"}), (req,res) => {
+    req.session.user = req.user
+    res.redirect("/")
 })
 
 export default router

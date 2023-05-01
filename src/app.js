@@ -12,6 +12,8 @@ import session from "express-session";
 import MongoStore from "connect-mongo";
 import config from "./config.js";
 import database from "../db.js";
+import passport from "passport";
+import initializePassport from "./auth/passport.js";
 
 //inicializacion
 const app = express();
@@ -32,18 +34,21 @@ app.use(express.urlencoded({extended:true}))
 app.use("/api/products", productsRouter)
 app.use("/api/carts/", cartRoutes)
 app.use(express.static(`${__dirname}/public`));
-// app.use(express.static('src/public', { type: 'application/javascript' }))
 app.use(morgan("dev"))
 app.use("/api/sessions", sessionsRouter)
 app.use(session({
     store: MongoStore.create({
         mongoUrl : config.dbUrl,
-        ttl: 20,
+        ttl: 80,
     }),
     resave: false,
     saveUninitialized: true,
     secret: "testsecret",
 }))
+
+initializePassport()
+app.use(passport.initialize())
+app.use(passport.session())
 
 const httpServer= app.listen(8080, () => {
     console.log("Listening on port 8080")
