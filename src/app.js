@@ -32,6 +32,7 @@ app.use(express.urlencoded({extended:true}))
 app.use("/api/products", productsRouter)
 app.use("/api/carts/", cartRoutes)
 app.use(express.static(`${__dirname}/public`));
+// app.use(express.static('src/public', { type: 'application/javascript' }))
 app.use(morgan("dev"))
 app.use("/api/sessions", sessionsRouter)
 app.use(session({
