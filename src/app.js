@@ -10,9 +10,15 @@ import morgan from "morgan";
 import sessionsRouter from "./routes/sessions.router.js"
 import session from "express-session";
 import MongoStore from "connect-mongo";
+import config from "./config.js";
+import database from "../db.js";
 
 //inicializacion
 const app = express();
+
+//database connection
+database.connect()
+
 
 //viewengine
 app.engine("handlebars", handlebars.engine())
@@ -30,7 +36,7 @@ app.use(morgan("dev"))
 app.use("/api/sessions", sessionsRouter)
 app.use(session({
     store: MongoStore.create({
-        mongoUrl : config.dbUrl,//falta crear el config
+        mongoUrl : config.dbUrl,
         ttl: 20,
     }),
     resave: false,
@@ -42,8 +48,7 @@ const httpServer= app.listen(8080, () => {
     console.log("Listening on port 8080")
 })
 
-//database connection
-mongoose.connect ("mongodb+srv://ljiglesias:doremi123@clusterlautaro.h8vzm81.mongodb.net/?retryWrites=true&w=majority")
+
 
 socket.connect(httpServer)
 
