@@ -9,7 +9,9 @@ function checkLogin(req, res, next) {
   }
   
   function checkSession(req, res, next) {
-    if (req.session.user) return res.redirect("/");
+    if (req.session && req.session.user) {
+      return res.redirect("/");
+    }
     next();
   }
   
